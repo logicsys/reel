@@ -8,9 +8,11 @@ Gem::Specification.new do |gem|
   gem.summary       = "A Reel good HTTP server"
   gem.homepage      = "https://github.com/celluloid/reel"
 
-  gem.executables   = `git ls-files -- bin/*`.split("\n").map{ |f| File.basename(f) }
-  gem.files         = `git ls-files`.split("\n")
-  gem.test_files    = `git ls-files -- {test,spec,features}/*`.split("\n")
+  gem.executables   = Dir.glob("bin/*").map { |f| File.basename(f) }
+  gem.files         = Dir.glob("{lib,bin,spec,examples,benchmarks}/**/*") + %w[
+    reel.gemspec Gemfile Rakefile README.md CHANGES.md LICENSE.txt
+  ]
+  gem.test_files    = Dir.glob("{test,spec,features}/**/*")
   gem.name          = "reel"
   gem.require_paths = ["lib"]
   gem.version       = Reel::VERSION
