@@ -23,5 +23,5 @@ group :test do
   gem 'websocket_parser', '>= 0.1.6'
   gem 'rake'
   gem 'rspec'
-  gem 'coveralls', require: false
+  gem 'coveralls_reborn', require: false
 end
