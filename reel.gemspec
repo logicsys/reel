@@ -19,11 +19,11 @@ Gem::Specification.new do |gem|
 
   gem.required_ruby_version = '>= 3.3.0'
 
-  gem.add_runtime_dependency 'celluloid',        '>= 0.15.1'
-  gem.add_runtime_dependency 'celluloid-io',     '>= 0.15.0'
-  gem.add_runtime_dependency 'celluloid-fsm',    '>= 0.20.0'
-  gem.add_runtime_dependency 'http',             '>= 0.6.0'
-  gem.add_runtime_dependency 'websocket-driver', '>= 0.5.1'
+  gem.add_runtime_dependency 'celluloid',        '~> 0.18'
+  gem.add_runtime_dependency 'celluloid-io',     '~> 0.17'
+  gem.add_runtime_dependency 'celluloid-fsm',    '~> 0.20'
+  gem.add_runtime_dependency 'http',             '~> 5.0'
+  gem.add_runtime_dependency 'websocket-driver', '~> 0.8'
 
   gem.add_development_dependency 'rake', '>= 12.0'
   gem.add_development_dependency 'rspec', '>= 3.0'
