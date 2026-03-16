@@ -35,6 +35,8 @@ module Reel
         when options.include?(:ca_path)
           OpenSSL::SSL::VERIFY_PEER
         else
+          Logger.warn "HTTPS server starting with VERIFY_NONE: peer certificate verification is disabled. " \
+                      "Set :ca_file, :ca_path, or :verify_mode to enable peer verification."
           OpenSSL::SSL::VERIFY_NONE
         end
 
