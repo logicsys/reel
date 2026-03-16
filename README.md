@@ -3,7 +3,7 @@
 [![Gem Version](https://badge.fury.io/rb/reel.svg)](http://rubygems.org/gems/reel)
 [![MIT licensed](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/celluloid/reel/master/LICENSE.txt)
 [![Build Status](https://secure.travis-ci.org/celluloid/reel.svg?branch=master)](http://travis-ci.org/celluloid/reel)
-[![Maintained: no](https://img.shields.io/maintenance/no/2016.svg)](https://github.com/celluloid/celluloid/issues/779)
+[![Maintained: yes](https://img.shields.io/maintenance/yes/2026.svg)](https://github.com/celluloid/reel)
 
 > "A dizzying lifetime... reeling by on celluloid" _-- Rush / Between The Wheels_
 
