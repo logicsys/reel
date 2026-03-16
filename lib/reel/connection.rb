@@ -138,9 +138,7 @@ module Reel
 
     # Hijack the socket from the connection
     def hijack_socket
-      # FIXME: this doesn't do a great job of ensuring we can hijack the socket
-      # in its current state. Improve the state detection.
-      if @request_fsm != :ready && @response_state != :headers
+      unless @request_fsm.state == :headers && @response_state == :headers
         raise StateError, "connection is not in a hijackable state"
       end
 
