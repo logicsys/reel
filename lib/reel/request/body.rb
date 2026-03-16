@@ -4,10 +4,14 @@ module Reel
     class Body
       include Enumerable
 
-      def initialize(request)
-        @request   = request
-        @streaming = nil
-        @contents  = nil
+      # Default maximum body size: 10 MB
+      DEFAULT_MAX_BODY_SIZE = 10 * 1024 * 1024
+
+      def initialize(request, max_body_size: DEFAULT_MAX_BODY_SIZE)
+        @request        = request
+        @streaming      = nil
+        @contents       = nil
+        @max_body_size  = max_body_size
       end
 
       # Read exactly the given amount of data
@@ -43,6 +47,9 @@ module Reel
           @contents = ""
           while chunk = @request.readpartial
             @contents << chunk
+            if @max_body_size && @contents.bytesize > @max_body_size
+              raise Reel::RequestError, "request body size exceeds limit of #{@max_body_size} bytes"
+            end
           end
         rescue StandardError
           @contents = nil
