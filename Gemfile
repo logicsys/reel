@@ -22,6 +22,6 @@ group :test do
   gem 'certificate_authority'
   gem 'websocket_parser', '>= 0.1.6'
   gem 'rake'
-  gem 'rspec'
+  gem 'rspec', '>= 4.0.0.beta1'
   gem 'coveralls_reborn', require: false
 end

@@ -26,7 +26,7 @@ Gem::Specification.new do |gem|
   gem.add_runtime_dependency 'websocket-driver', '~> 0.8'
 
   gem.add_development_dependency 'rake', '>= 12.0'
-  gem.add_development_dependency 'rspec', '>= 3.0'
+  gem.add_development_dependency 'rspec', '>= 4.0.0.beta1'
   gem.add_development_dependency 'certificate_authority'
   gem.add_development_dependency 'websocket_parser', '>= 0.1.6'
 end
