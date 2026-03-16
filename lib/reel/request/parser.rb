@@ -135,7 +135,7 @@ module Reel
           encodings.each do |encoding|
             # Only allow standard HTTP/1.1 transfer encodings
             unless encoding =~ /\A(chunked|compress|deflate|gzip|identity)\z/i
-              raise Reel::RequestError, "Invalid Transfer-Encoding: #{encoding}"
+              raise Reel::RequestError, "Invalid Transfer-Encoding header value"
             end
           end
 
