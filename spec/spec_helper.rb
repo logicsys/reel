@@ -5,6 +5,8 @@ require 'bundler/setup'
 require 'reel'
 require 'pry'
 
+Celluloid.boot
+
 def fixture_dir
   Pathname.new File.expand_path("../fixtures", __FILE__)
 end

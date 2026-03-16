@@ -100,6 +100,9 @@ module Reel
       def_delegator :@socket, :write
 
       RACK_HEADERS = {
+        'HTTP_HOST'                     => 'Host',
+        'HTTP_UPGRADE'                  => 'Upgrade',
+        'HTTP_CONNECTION'               => 'Connection',
         'HTTP_ORIGIN'                   => 'Origin',
         'HTTP_SEC_WEBSOCKET_KEY'        => 'Sec-WebSocket-Key',
         'HTTP_SEC_WEBSOCKET_KEY1'       => 'Sec-WebSocket-Key1',
@@ -112,6 +115,7 @@ module Reel
       def initialize(info, socket)
         @info, @socket = info, socket
         @env = Hash.new {|h,k| @info.headers[RACK_HEADERS[k]]}
+        @env['REQUEST_METHOD'] = @info.method
       end
     end
 

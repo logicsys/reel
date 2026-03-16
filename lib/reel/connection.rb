@@ -1,3 +1,4 @@
+require 'timeout'
 require 'reel/request'
 
 module Reel
@@ -50,12 +51,14 @@ module Reel
         raise StateError, "can't read in the '#{@request_fsm.state}' request state"
       end
 
-      if @timeout
+      if @timeout && Thread.current[:celluloid_actor]
         Celluloid.timeout(@timeout) { @parser.readpartial(size) }
+      elsif @timeout
+        Timeout.timeout(@timeout) { @parser.readpartial(size) }
       else
         @parser.readpartial(size)
       end
-    rescue Celluloid::TaskTimeout
+    rescue Celluloid::TaskTimeout, Timeout::Error
       raise RequestError, "read timeout after #{@timeout} seconds"
     end
 

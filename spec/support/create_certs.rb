@@ -14,7 +14,12 @@ ca.serial_number.number = 1
 ca.key_material.generate_key
 ca.signing_entity = true
 
-ca.sign! 'extensions' => { 'keyUsage' => { 'usage'  => %w(critical keyCertSign) } }
+ca.sign!(
+  'extensions' => {
+    'keyUsage' => { 'usage' => %w(critical keyCertSign) },
+    'extendedKeyUsage' => { 'usage' => %w(serverAuth clientAuth) }
+  }
+)
 
 ca_cert_path = File.join(certs_dir, 'ca.crt')
 ca_key_path  = File.join(certs_dir, 'ca.key')
@@ -48,7 +53,12 @@ client_cert.subject.common_name  = '127.0.0.1'
 client_cert.serial_number.number = 1
 client_cert.key_material.generate_key
 client_cert.parent = ca
-client_cert.sign!
+client_cert.sign!(
+  'extensions' => {
+    'keyUsage'         => { 'usage' => %w(digitalSignature) },
+    'extendedKeyUsage' => { 'usage' => %w(clientAuth) }
+  }
+)
 
 client_cert_path = File.join(certs_dir, 'client.crt')
 client_key_path  = File.join(certs_dir, 'client.key')

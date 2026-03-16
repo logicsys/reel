@@ -48,10 +48,15 @@ module Reel
         response_header = "#{response.version} #{response.status} #{response.reason}#{CRLF}"
         unless response.headers.empty?
           response_header << response.headers.map do |header, value|
-            "#{sanitize_header_value(header)}: #{sanitize_header_value(value)}"
+            "#{canonicalize_header(header)}: #{sanitize_header_value(value)}"
           end.join(CRLF) << CRLF
         end
         response_header << CRLF
+      end
+
+      # Canonicalize header name (e.g. "content-type" -> "Content-Type")
+      def canonicalize_header(name)
+        name.to_s.split('-').map(&:capitalize).join('-')
       end
 
       # Prevent HTTP response splitting / CRLF injection by stripping
