@@ -16,13 +16,16 @@ module Reel
 
     # Attempt to read this much data
     BUFFER_SIZE = 16384
-    attr_reader :buffer_size
+    # Default read timeout in seconds (30s)
+    DEFAULT_TIMEOUT = 30
+    attr_reader :buffer_size, :timeout
 
-    def initialize(socket, buffer_size = nil)
+    def initialize(socket, buffer_size = nil, timeout: DEFAULT_TIMEOUT)
       @attached    = true
       @socket      = socket
       @keepalive   = true
       @buffer_size = buffer_size || BUFFER_SIZE
+      @timeout     = timeout
       @parser      = Request::Parser.new(self)
       @request_fsm = Request::StateMachine.new(@socket)
 
@@ -47,7 +50,13 @@ module Reel
         raise StateError, "can't read in the '#{@request_fsm.state}' request state"
       end
 
-      @parser.readpartial(size)
+      if @timeout
+        Celluloid.timeout(@timeout) { @parser.readpartial(size) }
+      else
+        @parser.readpartial(size)
+      end
+    rescue Celluloid::TaskTimeout
+      raise RequestError, "read timeout after #{@timeout} seconds"
     end
 
     # Read a request object from the connection
