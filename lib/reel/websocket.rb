@@ -74,7 +74,7 @@ module Reel
     rescue IOError, Errno::ECONNRESET, Errno::EPIPE
       cancel_timer!
       raise SocketError, "error writing to socket"
-    rescue
+    rescue StandardError
       cancel_timer!
       raise
     end

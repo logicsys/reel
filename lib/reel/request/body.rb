@@ -44,7 +44,7 @@ module Reel
           while chunk = @request.readpartial
             @contents << chunk
           end
-        rescue
+        rescue StandardError
           @contents = nil
           raise
         end
