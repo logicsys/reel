@@ -48,10 +48,16 @@ module Reel
         response_header = "#{response.version} #{response.status} #{response.reason}#{CRLF}"
         unless response.headers.empty?
           response_header << response.headers.map do |header, value|
-            "#{header}: #{value}"
+            "#{sanitize_header_value(header)}: #{sanitize_header_value(value)}"
           end.join(CRLF) << CRLF
         end
         response_header << CRLF
+      end
+
+      # Prevent HTTP response splitting / CRLF injection by stripping
+      # CR and LF characters from header names and values
+      def sanitize_header_value(value)
+        value.to_s.delete("\r\n")
       end
       private :render_header
     end

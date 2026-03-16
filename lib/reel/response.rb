@@ -36,7 +36,7 @@ module Reel
       else raise TypeError, "can't render #{@body.class} as a response body"
       end
 
-      @headers = HTTP::Headers.coerce(headers)
+      @headers = HTTP::Headers.coerce(sanitize_headers(headers))
       @version = http_version
     end
 
@@ -66,5 +66,13 @@ module Reel
       "HTTP/1.1".freeze
     end
     private :http_version
+
+    # Strip CR/LF from header values to prevent HTTP response splitting
+    def sanitize_headers(headers)
+      headers.each_with_object({}) do |(key, value), sanitized|
+        sanitized[key] = value.to_s.delete("\r\n")
+      end
+    end
+    private :sanitize_headers
   end
 end
