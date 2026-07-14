@@ -1,3 +1,10 @@
+## 0.8.1 (2026-07-14)
+
+* First stable release of the 0.8 line (0.8.0 was never released beyond .pre).
+* Celluloid 0.18 compatibility; depends on celluloid ~> 0.18 and
+  celluloid-io ~> 0.18.
+* Ruby >= 3.3; RSpec 4 test suite.
+
 ## 0.6.1 (2016-03-14)
 
 * [#221](https://github.com/celluloid/reel/pull/221)
