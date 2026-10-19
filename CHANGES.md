@@ -1,3 +1,7 @@
+## 0.8.2 (2026-10-19)
+
+* Allow http 6.x (runtime constraint now >= 5.0, < 7).
+
 ## 0.8.1 (2026-07-14)
 
 * First stable release of the 0.8 line (0.8.0 was never released beyond .pre).
