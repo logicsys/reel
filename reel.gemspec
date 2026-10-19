@@ -23,6 +23,7 @@ Gem::Specification.new do |gem|
   gem.add_runtime_dependency 'celluloid-io',     '~> 0.18'
   gem.add_runtime_dependency 'celluloid-fsm',    '~> 0.20'
   gem.add_runtime_dependency 'http',             '>= 5.0', '< 7'
+  gem.add_runtime_dependency 'logger',           '~> 1.4' # bundled (not default) gem since Ruby 4.0
   gem.add_runtime_dependency 'websocket-driver', '~> 0.8'
 
   gem.add_development_dependency 'rake', '>= 12.0'
