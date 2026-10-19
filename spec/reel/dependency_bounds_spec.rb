@@ -10,10 +10,11 @@ RSpec.describe "Dependency version bounds" do
     runtime_deps = gemspec_content.lines.select { |l| l =~ /add_runtime_dependency/ }
 
     runtime_deps.each do |dep|
-      # Each runtime dependency should use ~> (pessimistic) rather than >= (unbounded)
-      expect(dep).to match(/~>/),
+      # Each runtime dependency needs an upper bound: either pessimistic (~>)
+      # or an explicit ceiling (< N), rather than an open-ended >=
+      expect(dep).to match(/~>|'<\s*\d/),
         "Unbounded runtime dependency found: #{dep.strip}\n" \
-        "Use pessimistic version constraint (~>) to prevent unexpected breaking changes"
+        "Use a pessimistic (~>) or explicit upper-bound (<) version constraint to prevent unexpected breaking changes"
     end
   end
 end
