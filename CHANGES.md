@@ -1,6 +1,7 @@
 ## 0.8.2 (2026-10-19)
 
 * Allow http 6.x (runtime constraint now >= 5.0, < 7).
+* Ruby 4.0 support: declare the `logger` dependency (a bundled rather than default gem since Ruby 4.0).
 
 ## 0.8.1 (2026-07-14)
 
